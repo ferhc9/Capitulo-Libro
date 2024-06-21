@@ -1,0 +1,304 @@
+---
+title: "Ingrese nombre del capítulo"
+subtitle: "Ingrese subtitulo" 
+date: last-modified
+date-format: 'DD [de] MMMM, YYYY'
+author: 
+    - name: nombre autor 1 <br> [nombre@mail.udp.cl](nombre@mail.udp.cl]){style="color:blue;"}
+      affiliation: 
+        - name: "Facultad de Ciencias Sociales e Historia <br> Universidad Diego Portales"
+    - name: nombre autor 2 <br> [nombre@mail.udp.cl](nombre@mail.udp.cl]){style="color:blue;"}
+      affiliation: 
+        - name: "Facultad de Ciencias Sociales e Historia <br> Universidad Diego Portales"
+last-modified:
+title-block-banner: true
+format: 
+  html:
+    page-layout: full
+    embed-resources: true
+    smooth-scroll: true
+    fontcolor: black
+    toc: true
+    toc-location: left
+    toc-title: Indice
+    code-copy: true
+    code-link: true
+    code-fold: true
+    code-tools: true
+    code-summary: "Click para ver el código"
+    anchor-sections: true
+    code-overflow: wrap
+    fig-cap-location: top
+csl: apa.csl
+lang: es
+---
+
+```{r}
+#| code-fold: TRUE
+#| warning: false
+#| message: false
+#| results: 'hide'
+# Código de ajustes
+
+rm(list = ls()) # Limpiamos la memoria 
+options(scipen = 999) # Desactivamos la notación científica
+options(knitr.kable.NA = '') # NA en blanco
+
+# Librerías utilizadas
+library(rio)
+library(tidyverse)
+```
+
+Esta es una plantilla para que puedan escribir sus propios capítulos. Más instrucciones para escribir documentos técnicos en: <https://quarto.org/docs/visual-editor/technical.html>
+
+# Título del apartado
+
+## Titulo 2
+
+## Subtítulo
+
+### Sub-subtítulo
+
+### Expresiones matemáticas: $y = \beta_0 + \beta_1X_1 + \epsilon$
+
+```{=tex}
+\begin{equation}
+\tag{4.1}
+  Y_i = \beta_0 + \beta_1 X_i + \epsilon_i, \quad \text{for } i = 1, 2, \dots, n,
+\end{equation}
+```
+```{=tex}
+\begin{equation}
+\tag{8.1}
+ \sqrt{\sum^P_{j=1}(x_{aj} - x_{bj})^2}
+\end{equation}
+
+\begin{equation}
+\tag{8.2}
+ \sum^P_{j=1} | x_{aj} - x_{bj} | 
+\end{equation}
+```
+\$\sum\^P\_{j=1} \| x\_{aj} - x\_{bj} \| \$
+
+### Listar elementos:
+
+-   Elemento 1
+
+    -   Elemento
+
+-   Elemento 2
+
+-   Elemento 3
+
+### Enumerar elementos
+
+1.  L
+2.  L2
+3.  L3
+    1.  L3.1
+    2.  L3.2
+4.  L4
+
+```{=html}
+<!-- -->
+```
+1.  Elemento 1
+2.  Elemento 2
+    1.  Sub-elemento 2
+3.  Elemento 3
+
+### Incrustar código:
+
+```{r}
+print("Código normal: es un chunk tal cual, sin configuraciones. El código se ejecutará abajo de este.")
+```
+
+Para añadir una configuarción, se debe usar este código:
+
+```         
+#| opcion: valor
+```
+
+Eval: false
+
+Si el propósito es no mostrar el output del código para, se debe usar la opción `eval: FALSE`:
+
+```{r}
+#| eval: FALSE
+
+print("Este código no se ejecuta. Pero sí se muestra.")
+```
+
+Echo: false
+
+Si el propósito es no mostrar el output del código, se debe usar la opción `echo: FALSE`:
+
+```{r}
+#| echo: FALSE
+
+print("Este código no se muestra, pero sí se ejecuta.")
+
+vector_1 <- seq(from = 1, to = 5.5, by = .5)
+vector_2 <- seq(from = 1, to = 20, by = 2)
+vector_3 <- rep(2023, times = 10)
+vector_4 <- rep(c(1,0), each = 5)
+vector_5 <- vector_1 + vector_2
+
+matriz <- cbind(vector_1, vector_2, vector_3, vector_4, vector_5)
+matriz
+```
+
+### Warning y message
+
+Se pueden suprimir los mensajes de "warning" y "message" para obtener una salida más 'limpia'.
+
+-   **Warning:**
+
+```{r}
+vector_1 <- seq(from = 1, to = 5, by = 0.5)
+vector_2 <- seq(from = 1, to = 20, by = 2)
+
+vector_3 <- vector_1 + vector_2
+```
+
+Aplicar warning: false
+
+```{r}
+#| warning: false
+vector_1 <- seq(from = 1, to = 5, by = 0.5)
+vector_2 <- seq(from = 1, to = 20, by = 2)
+
+vector_3 <- vector_1 + vector_2
+```
+
+Aplicar message: false
+
+```{r}
+#| message: false
+library(tidyverse)
+```
+
+### Tablas
+
+### Tabla manual
+
+Puedes usar las herramientas del **menú de edición**.
+
+Las tablas se pueden realizar manualmente en R markdown de la siguiente forma:
+
+```         
+| Columna A | Columna B |
+|:---------:|:---------:|
+| Celda 1   | Celda 2   |
+|:---------:|:---------:|
+```
+
+| Columna A | Columna B |
+|:---------:|:---------:|
+|  Celda 1  |  Celda 2  |
+
+| Col1 | Col2 | Col3 | Col4 | Col5 |
+|------|------|------|------|------|
+|      |      |      |      |      |
+|      |      |      |      |      |
+|      |      |      |      |      |
+|      |      |      |      |      |
+|      |      |      |      |      |
+
+: Tabla prueba
+
+### Tablas a partir de código
+
+Para poder armar tablas a partir de código, debes usar la librería `knitr`. La función que usaremos se llama `kable()`.
+
+También, es importante agregar una leyenda con las opciones:
+
+-   `#| label: tbl-pinguinos`. un nombre con el cuál identificar el chunk.
+
+-   `#| tbl-cap: "primeros 5 casos de la base de datos pinguinos"`. Una leyenda o *caption*.
+
+```{r}
+#| label: tbl-pinguinos
+#| tbl-cap: "primeros 5 casos de la base de datos pinguinos"
+
+library(datos)
+library(tidyverse) 
+pinguinos %>% 
+  head() %>% 
+  knitr::kable()
+```
+
+![Imagen prueba](files/imagen.png):kable()
+
+### Imágenes
+
+Para insertar una imágen, se puede usar el menú superior o usar sintaxis:
+
+-   **Archivo local:**
+
+```         
+![Imagen](files/imagen.png)
+```
+
+-   **Archivo en linea:**
+
+```         
+![Imagen](https://d33wubrfki0l68.cloudfront.net/0b4d0569b2ddf6147da90b110fbb2a17653c8b08/f06f3/images/shutterstock/r_vs_rstudio_1.png)
+```
+
+Puedes controlar el ancho y largo de la siguiente forma:
+
+```         
+![Imagen](files/imagen.png){width=300}
+```
+
+Imagen:
+
+![Imagen](https://d33wubrfki0l68.cloudfront.net/0b4d0569b2ddf6147da90b110fbb2a17653c8b08/f06f3/images/shutterstock/r_vs_rstudio_1.png){fig-align="center" width="300" height="160"}
+
+-   **Método chunk**
+
+Puedes usar la función `include_graphics` para
+
+```{r}
+#| fig.align: 'center'
+
+knitr::include_graphics("files/imagen.png")
+```
+
+Se puede ocultar este bloque de código para que no se vea (echo: false).
+
+Se puede ajustar el ancho y alto de la imagen con las opciones:
+
+-   `fig.width`
+
+-   `fig.height`
+
+### Figuras de gráficos
+
+Para los gráficos, quarto tiene las herramientas para asignar título y leyenda:
+
+-   `label`: asigna un nombre tipo identificador al gráfico. Para indicar que es un gráfico, uso el prefijo `fig-`.
+
+-   `fig-cap`: permite poner un texto tipo leyenda.
+
+-   `fig.width`: ancho de la figura.
+
+-   `fig.height`: alto de la figura.
+
+(Ver código en el archivo .qmd)
+
+```{r}
+#| label: fig-plots
+#| fig-cap: "Un título muy elegnate"
+#| message: FALSE
+#| fig.width: 7
+#| fig.height: 4
+
+pinguinos %>% 
+  ggplot() + aes(x = isla) +
+  geom_bar() +
+  labs(
+    title = "Islas (pingüinos)"
+  )
+```
