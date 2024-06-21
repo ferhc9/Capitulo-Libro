@@ -59,7 +59,6 @@ Esta es una plantilla para que puedan escribir sus propios capítulos. Más inst
 
 ### Sub-subtítulo
 
-### Expresiones matemáticas: $y = \beta_0 + \beta_1X_1 + \epsilon$
 
 ```{=tex}
 \begin{equation}
